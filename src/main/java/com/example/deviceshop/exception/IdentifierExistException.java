@@ -1,6 +1,7 @@
-package com.lina.airline.exception;
+package com.example.deviceshop.exception;
 
-import com.lina.airline.utils.ErrorDetails;
+
+import com.example.deviceshop.utils.ErrorDetails;
 
 public class IdentifierExistException  extends BaseException{
     public IdentifierExistException(String message, Throwable ex, String errorCode) {

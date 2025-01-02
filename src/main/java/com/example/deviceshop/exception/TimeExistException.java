@@ -1,4 +1,4 @@
-package com.lina.airline.exception;
+package com.example.deviceshop.exception;
 
 public class TimeExistException extends BaseException{
     public TimeExistException(String message, Throwable ex, String errorCode) {

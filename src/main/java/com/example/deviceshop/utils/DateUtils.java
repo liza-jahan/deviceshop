@@ -1,4 +1,4 @@
-package com.lina.airline.utils;
+package com.example.deviceshop.utils;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;

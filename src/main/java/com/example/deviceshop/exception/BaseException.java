@@ -1,4 +1,4 @@
-package com.lina.airline.exception;
+package com.example.deviceshop.exception;
 
 import lombok.Getter;
 

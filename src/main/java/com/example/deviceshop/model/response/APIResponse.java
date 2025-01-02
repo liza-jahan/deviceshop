@@ -1,5 +1,6 @@
-package com.lina.airline.dto;
+package com.example.deviceshop.model.response;
 
+import com.example.deviceshop.dto.ErrorDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

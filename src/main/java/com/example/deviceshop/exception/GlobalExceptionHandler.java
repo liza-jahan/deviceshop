@@ -1,12 +1,8 @@
-package com.lina.airline.exception;
+package com.example.deviceshop.exception;
 
 
-
-import com.lina.airline.dto.APIResponse;
-import com.lina.airline.dto.ErrorDTO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
+import com.example.deviceshop.dto.ErrorDTO;
+import com.example.deviceshop.model.response.APIResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

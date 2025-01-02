@@ -1,4 +1,4 @@
-package com.lina.airline.dto;
+package com.example.deviceshop.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
