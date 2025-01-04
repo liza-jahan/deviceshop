@@ -19,16 +19,14 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public APIResponse<?> handleMethodArgumentException(MethodArgumentNotValidException exception) {
-        APIResponse<?> serviceResponse = new APIResponse<>();
         List<ErrorDTO> errors = new ArrayList<>();
         exception.getBindingResult().getFieldErrors()
-                .forEach(error -> {
-                    ErrorDTO errorDTO = new ErrorDTO(error.getField(), error.getDefaultMessage());
-                    errors.add(errorDTO);
-                });
-        serviceResponse.setStatus(HttpStatus.BAD_REQUEST.getReasonPhrase());
-        serviceResponse.setErrors(errors);
-        return serviceResponse;
+                .forEach(error -> errors.add(new ErrorDTO(error.getField(), error.getDefaultMessage())));
+
+        return APIResponse.builder()
+                .status(HttpStatus.BAD_REQUEST.getReasonPhrase())
+                .errors(errors)
+                .build();
     }
 
     @ExceptionHandler(IdentifierExistException.class)

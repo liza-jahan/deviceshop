@@ -1,5 +1,6 @@
 package com.example.deviceshop.model.response;
 
+
 import com.example.deviceshop.dto.ErrorDTO;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -22,5 +23,8 @@ public class APIResponse<T> {
     private String dateTime;
     private List<ErrorDTO> errors;
     private T results;
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
 }

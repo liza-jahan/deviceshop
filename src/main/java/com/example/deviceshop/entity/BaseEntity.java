@@ -2,6 +2,7 @@ package com.example.deviceshop.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -17,5 +18,6 @@ public abstract class BaseEntity implements Serializable {
     @Column(columnDefinition = "VARCHAR(36)")
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
+    @CreationTimestamp
     private Date createdTime;
 }

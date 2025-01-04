@@ -1,11 +1,9 @@
 package com.example.deviceshop.model.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -15,4 +13,6 @@ public class UserRequest {
     private  String phoneNumber;
     private  String password;
   //  private  String confirmPassword;
+
+
 }
