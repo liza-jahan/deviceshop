@@ -39,7 +39,7 @@ public class SecurityConfig {
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/v1/users/**", "/api/v1/**", "register", "login").permitAll()
+                        .requestMatchers("/api/v1/users/**", "/api/v1/**","/css/**", "/js/**", "dashboard","register", "login").permitAll()
                         .anyRequest()
                         .authenticated()
                 )

@@ -38,6 +38,11 @@ public class AuthenticationController {
             return "login";  // Re-renders the login page with an error message
         }
     }
+    @GetMapping("/dashboard")
+    public String showDashboard() {
+        return "dashboard";  // Renders dashboard.html
+    }
+
 }
 
 
