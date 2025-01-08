@@ -66,5 +66,30 @@ public class ProductServiceImp implements ProductService{
 
 
     }
+    @Override
+    public ProductEntity getProductDetails(Long id) {
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Not"));
+    }
+
+    @Override
+    public List<ProductRequest> getAllProduct() {
+        // Fetch all ProductEntity objects
+        List<ProductEntity> productEntities = productRepository.findAll();
+
+        // Map ProductEntity to ProductRequest
+        return productEntities.stream()
+                .map(productEntity -> {
+                    ProductRequest productRequest = new ProductRequest();
+                    productRequest.setName(productEntity.getName());
+                    productRequest.setDescription(productEntity.getDescription());
+                    productRequest.setPrice(productEntity.getPrice());
+                    // Add other fields as needed
+                    return productRequest;
+                })
+                .collect(Collectors.toList());
+    }
 
 }
+
+
+

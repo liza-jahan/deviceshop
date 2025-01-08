@@ -30,5 +30,6 @@ public class ProductEntity {
 
 
     private String category;
+   // private String
 
 }

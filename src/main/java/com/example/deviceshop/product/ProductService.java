@@ -10,7 +10,9 @@ import java.util.Optional;
 public interface ProductService {
     Long saveProduct(ProductRequest productRequest);
 
-    List<ProductDto> searchProduct(String keyWord);
+    ProductEntity getProductDetails(Long id);
 
     Optional<ProductEntity> updateProductInfo(Long id,ProductRequest productRequest);
+    List<ProductRequest> getAllProduct();
+    List<ProductDto> searchProduct(String keyWord);
 }
