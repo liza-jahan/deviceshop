@@ -13,6 +13,6 @@ public interface ProductService {
     ProductEntity getProductDetails(Long id);
 
     Optional<ProductEntity> updateProductInfo(Long id,ProductRequest productRequest);
-    List<ProductRequest> getAllProduct();
+    List<ProductEntity> getAllProduct();
     List<ProductDto> searchProduct(String keyWord);
 }

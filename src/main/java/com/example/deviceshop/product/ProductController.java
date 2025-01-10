@@ -1,6 +1,5 @@
 package com.example.deviceshop.product;
 
-import com.example.deviceshop.dto.ProductDto;
 import com.example.deviceshop.model.request.ProductRequest;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,10 +14,10 @@ import java.util.List;
 public class ProductController {
 
     private final ProductService productService;
-    @GetMapping("/products/new")
+    @GetMapping("/products")
     public String showCreateProductForm(Model model) {
         model.addAttribute("productRequest", new ProductEntity());
-        return "productRegistrationForm";
+        return "productAddedForm";
     }
 
     @PostMapping("/products")
@@ -31,7 +30,8 @@ public class ProductController {
                 model.addAttribute("errorMessage", e.getMessage());
             }
 
-        return "redirect:/products";
+     //   return "redirect:/productCardView";
+        return "productAddedForm";
     }
 
 
@@ -47,11 +47,18 @@ public class ProductController {
         productService.updateProductInfo(id,productRequest);
         return "redirect:/viewList";
     }
-    @GetMapping("/products")
+    @GetMapping("/all-products")
     public String getAllProducts(Model model) {
-        List<ProductRequest> products = productService.getAllProduct(); // Fetch product list
-        model.addAttribute("products", products);
-        return "productCards";
-    }
+        List<ProductEntity> products = productService.getAllProduct(); // Fetch product list
+        model.addAttribute("products",products);
 
+        return "productCardView";
+    }
+//    @GetMapping("/products/search")
+//    public String searchProducts(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+//        List<ProductDto> products = productService.searchProduct(keyword);
+//        model.addAttribute("products", products);
+//        model.addAttribute("keyword", keyword);
+//        return "search"; // The Thymeleaf template name
+//    }
 }

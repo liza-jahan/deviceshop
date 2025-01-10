@@ -1,13 +1,18 @@
 package com.example.deviceshop.product;
 
 import com.example.deviceshop.dto.ProductDto;
-import com.example.deviceshop.entity.UserEntity;
 import com.example.deviceshop.exception.NotFoundException;
 import com.example.deviceshop.model.request.ProductRequest;
 import com.example.deviceshop.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -19,13 +24,41 @@ public class ProductServiceImp implements ProductService{
     private final ProductRepository productRepository;
     @Override
     public Long saveProduct(ProductRequest productRequest) {
-        ProductEntity productEntity=new ProductEntity();
+        // Create a new ProductEntity and map basic details
+        ProductEntity productEntity = new ProductEntity();
         productEntity.setName(productRequest.getName());
         productEntity.setPrice(productRequest.getPrice());
         productEntity.setCategory(productRequest.getCategory());
         productEntity.setStock(productRequest.getStock());
         productEntity.setDescription(productRequest.getDescription());
-         productRepository.save(productEntity);
+
+        // image file upload
+        MultipartFile imageFile = productRequest.getImage(); // Ensure productRequest.getImage() returns a MultipartFile
+        if (imageFile != null && !imageFile.isEmpty()) {
+            // upload directory and file name
+            String uploadDir = "C:/uploads/";
+            String imageName = System.currentTimeMillis() + "_" + imageFile.getOriginalFilename(); // Add timestamp to avoid duplicates
+            Path uploadPath = Paths.get(uploadDir);
+
+            try {
+                // Create directories if they don't exist
+                if (!Files.exists(uploadPath)) {
+                    Files.createDirectories(uploadPath);
+                }
+
+                // Save the file
+                Path filePath = uploadPath.resolve(imageName);
+                imageFile.transferTo(filePath.toFile());
+
+                // Set the relative file path in the entity
+                productEntity.setImage("/uploads/" + imageName);
+            } catch (IOException e) {
+                throw new IllegalArgumentException("Error saving image to disk: " + e.getMessage(), e);
+            }
+        } else {
+            throw new IllegalArgumentException("No image file provided or the file is empty.");
+        }
+        productRepository.save(productEntity);
 
         return productEntity.getId();
     }
@@ -34,7 +67,7 @@ public class ProductServiceImp implements ProductService{
     public List<ProductDto> searchProduct(String keyWord) {
         List<ProductEntity> productEntities;
         if (keyWord != null && !keyWord.isEmpty()) {
-            productEntities = this.productRepository.findByTitleContaining(keyWord); // No need for "%"
+            productEntities = this.productRepository.findByInformation(keyWord); // No need for "%"
         } else {
             return Collections.emptyList();
         }
@@ -46,6 +79,7 @@ public class ProductServiceImp implements ProductService{
                     productDto.setDescription(productEntity.getDescription());
                     productDto.setStock(productEntity.getStock());
                     productDto.setPrice(productEntity.getPrice());
+                    productDto.setImage(productEntity.getImage());
                     return productDto;
                 })
                 .collect(Collectors.toList());
@@ -72,21 +106,10 @@ public class ProductServiceImp implements ProductService{
     }
 
     @Override
-    public List<ProductRequest> getAllProduct() {
-        // Fetch all ProductEntity objects
-        List<ProductEntity> productEntities = productRepository.findAll();
+    public List<ProductEntity> getAllProduct() {
 
-        // Map ProductEntity to ProductRequest
-        return productEntities.stream()
-                .map(productEntity -> {
-                    ProductRequest productRequest = new ProductRequest();
-                    productRequest.setName(productEntity.getName());
-                    productRequest.setDescription(productEntity.getDescription());
-                    productRequest.setPrice(productEntity.getPrice());
-                    // Add other fields as needed
-                    return productRequest;
-                })
-                .collect(Collectors.toList());
+        return productRepository.findAll();
+
     }
 
 }
