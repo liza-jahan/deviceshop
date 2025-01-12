@@ -10,6 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
-    @Query("select p from ProductEntity p where p.name like :key")
+    @Query("select p from ProductEntity p where p.productName like :key")
     List<ProductEntity> findByInformation(@Param("key") String name );
 }

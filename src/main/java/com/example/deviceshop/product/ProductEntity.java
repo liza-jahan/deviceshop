@@ -1,14 +1,15 @@
 package com.example.deviceshop.product;
 
 
+import com.example.deviceshop.sales.SaleEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,7 +22,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    private String productName;
 
     private BigDecimal price;
 
@@ -34,6 +35,12 @@ public class ProductEntity {
 
     @Column(name = "photo")
     private String image;
-   // private String
 
+    private String paymentMethod;
+    private BigDecimal total;
+    private BigDecimal offerPrice;
+    private BigDecimal vat;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<SaleEntity> sales;
 }

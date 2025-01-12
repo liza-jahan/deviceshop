@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+  <title>Create Sale</title>
+</head>
+<body>
+<h1>Create Sale</h1>
+<form action="/createSale" method="post">
+  <label for="productId">Product:</label>
+  <select id="productId" name="productId">
+    <option th:each="product : ${products}" th:value="${product.id}" th:text="${product.productName}"></option>
+  </select>
+  <br>
+  <label for="quantity">Quantity:</label>
+  <input type="number" id="quantity" name="quantity" required>
+  <br>
+  <button type="submit">Submit</button>
+</form>
+
+<!--<div th:if="${successMessage}">-->
+<!--  <p th:text="${successMessage}"></p>-->
+<!--</div>-->
+<!--<div th:if="${errorMessage}">-->
+<!--  <p th:text="${errorMessage}"></p>-->
+<!--</div>-->
+<a href="/createSale">Print</a>
+
+</body>
+</html>

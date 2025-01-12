@@ -23,7 +23,7 @@ public class ProductRequest {
 
     @NotBlank(message = "Product name cannot be blank")
     @Size(min = 2, max = 100, message = "Product name must be between 2 and 100 characters")
-    private String name;
+    private String productName;
 
     @NotNull(message = "Price cannot be null")
     @Positive(message = "Price must be positive")
@@ -39,4 +39,17 @@ public class ProductRequest {
     @NotBlank(message = "Category cannot be blank")
     private String category;
     private MultipartFile image;
+
+    @NotNull(message = "Payment method cannot be null")
+    @Size(min = 3, max = 20, message = "Payment method must be between 3 and 20 characters")
+    private String paymentMethod;
+
+    @NotNull(message = "Total cannot be null")
+    private BigDecimal total;
+
+    private BigDecimal offerPrice;
+
+    @NotNull(message = "VAT cannot be null")
+    private BigDecimal vat;
+
 }

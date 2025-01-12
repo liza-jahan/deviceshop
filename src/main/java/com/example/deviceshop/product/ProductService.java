@@ -15,4 +15,5 @@ public interface ProductService {
     Optional<ProductEntity> updateProductInfo(Long id,ProductRequest productRequest);
     List<ProductEntity> getAllProduct();
     List<ProductDto> searchProduct(String keyWord);
+    ProductEntity getProductById(Long id);
 }

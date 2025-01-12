@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details</title>
+    <link rel="stylesheet" th:href="@{/css/viewStyle.css}">
+</head>
+<body>
+<div class="product-page">
+
+    <!-- Product Image -->
+    <div class="product-image">
+        <img th:src="@{${product.image}}" alt="Product Image" src="" onerror="this.src='/images/default-product.png'">
+    </div>
+
+    <div class="product-details">
+        <h1 th:text="${product.getProductName}">Product Name</h1>
+        <p class="price" th:text="'৳' + ${product.price}">৳185</p>
+        <p class="discount-info" th:if="${product.offerPrice}" th:text="'Save ' + ${product.offerPrice} + ' TAKA'">Save 230 TAKA</p>
+        <p class="total" th:text="'৳' + ${product.total}">৳185</p>
+        <div class="actions">
+            <button class="add-to-cart" th:href="@{/add}">Add to Cart</button>
+        </div>
+        <div class="description">
+            <h2>Brief Description</h2>
+            <ul>
+                <li th:each="desc : ${product.description}" th:text="${desc}">Description item</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

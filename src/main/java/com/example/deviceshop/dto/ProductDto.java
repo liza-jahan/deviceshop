@@ -19,4 +19,9 @@ public class ProductDto {
     private String stock;
     private String image;
     private String category;
+    private String paymentMethod;
+    private BigDecimal total;
+    private BigDecimal offerPrice;
+    private BigDecimal vat;
+
 }

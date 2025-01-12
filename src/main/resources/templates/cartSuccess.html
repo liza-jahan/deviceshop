@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart Success</title>
+</head>
+<body>
+<h1>Product Added to Cart</h1>
+
+<div th:if="${cartId}">
+    <p>Cart ID: <span th:text="${cartId}"></span></p>
+</div>
+
+<div>
+    <a href="/cart">View Cart</a>
+    <a href="/">Continue Shopping</a>
+</div>
+</body>
+</html>

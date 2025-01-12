@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Cash Memo</title>
+</head>
+<body>
+<h1>Cash Memo</h1>
+
+<p th:if="${successMessage}" th:text="${successMessage}" style="color: green;"></p>
+<p th:if="${errorMessage}" th:text="${errorMessage}" style="color: red;"></p>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Product Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Offer Price</th>
+        <th>VAT</th>
+        <th>Total Price</th>
+        <th>Sale Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sale : ${sales}">
+        <td th:text="${sale.productName}"></td>
+        <td th:text="${sale.quantity}"></td>
+        <td th:text="${sale.product.price}"></td>
+        <td th:text="${sale.product.offerPrice}"></td>
+        <td th:text="${sale.product.vat}"></td>
+        <td th:text="${sale.totalPrice}"></td>
+        <td th:text="${sale.saleDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<a href="/createSale">Print</a>
+<a href="#">Close</a>
+</body>
+</html>
