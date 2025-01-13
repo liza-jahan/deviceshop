@@ -8,5 +8,6 @@ import java.util.List;
 public interface SaleService {
     Long saveCashMemo(SaleRequest saleRequest, ProductRequest productRequest);
     List<SaleEntity> getAllInfo();
+    public List<SaleEntity> getSalesForProduct(Long productId);
 
 }

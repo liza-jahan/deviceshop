@@ -16,4 +16,5 @@ public interface ProductService {
     List<ProductEntity> getAllProduct();
     List<ProductDto> searchProduct(String keyWord);
     ProductEntity getProductById(Long id);
+  //  ProductEntity getProductDetails(Long productId)
 }

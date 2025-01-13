@@ -26,9 +26,9 @@ public class CartEntity {
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
 
-    @ManyToOne
-    @JoinColumn(name = "userId")
-    private UserEntity userEntity;
+//    @ManyToOne
+//    @JoinColumn(name = "userId")
+//    private UserEntity userEntity;
 
 
     @ManyToOne

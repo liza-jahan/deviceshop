@@ -44,4 +44,8 @@ public class SaleServiceImp implements SaleService {
     public List<SaleEntity> getAllInfo() {
         return saleRepository.findAll();
     }
+    @Override
+    public List<SaleEntity> getSalesForProduct(Long productId) {
+        return saleRepository.findByProductId(productId); // Query sales by product id
+    }
 }

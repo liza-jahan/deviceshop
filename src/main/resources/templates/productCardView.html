@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Cards</title>
     <link rel="stylesheet" href="/css/product-cardsStyle.css">
 </head>
@@ -9,11 +11,11 @@
     <h1>Our Products</h1>
     <div class="card-container" th:action="@{/productView}">
         <div class="card" th:each="product : ${products}">
-                  <div class="card-image">
-                    <img th:src="${product.image}" alt="Product Image" src="">
-                  </div>
+            <div class="card-image">
+                <img th:src="${product.image}" alt="Product Image" />
+            </div>
             <div class="card-body">
-                <h2 th:text="${product.getProductName}">Product Name</h2>
+                <h2 th:text="${product.productName}">Product Name</h2>
                 <p th:text="${product.description}">Short description of the product.</p>
             </div>
             <div class="card-footer">
@@ -22,5 +24,6 @@
         </div>
     </div>
 </div>
+<script src="/js/product-cardsScript.js"></script>
 </body>
 </html>

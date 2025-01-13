@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,15 +22,15 @@ public class CartServiceImp implements CartService {
     private final UserRepository userRepository;
     private  final ProductRepository productRepository;
     @Override
-    public UUID addCart(UUID userId, Long productId) {
-        UserEntity userEntity= userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Not found by id"));
+    public UUID addCart( Long productId) {
+        //UserEntity userEntity= userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Not found by id"));
         ProductEntity productEntity=productRepository.findById(productId).orElseThrow(() -> new RuntimeException("not found by home details id"));
 
 
 
         CartEntity cartEntity= new CartEntity();
-        cartEntity.setUserEntity(userEntity);
-        cartEntity.setProductEntity(productEntity);
+//        cartEntity.setUserEntity(userEntity);
+     cartEntity.setProductEntity(productEntity);
 
         cartRepository.save(cartEntity) ;
         return  cartEntity.getId();
@@ -37,17 +38,13 @@ public class CartServiceImp implements CartService {
     }
 
     @Override
-    public void removeCart(UUID userId, Long productId) {
-        Optional<CartEntity> houseFavouriteList =cartRepository.findByIdAndProductEntityId(userId,productId);
+    public void removeCart(UUID id) {
+        Optional<CartEntity> houseFavouriteList =cartRepository.findById(id);
         houseFavouriteList.ifPresent(cartRepository::delete);
     }
-    public CartEntity getCartFromSession(HttpSession session) {
-        CartEntity cart = (CartEntity) session.getAttribute("cart");
-        if (cart == null) {
-            cart = new CartEntity();
-            session.setAttribute("cart", cart);
-        }
+    @Override
+    public List<CartEntity> getAllCartItems() {
 
-        return cart;
+        return cartRepository.findAll();
     }
 }

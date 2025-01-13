@@ -42,6 +42,7 @@ public class ProductServiceImp implements ProductService{
         productEntity.setOfferPrice(productRequest.getOfferPrice());
         productEntity.setTotal(priceDifference);
 
+
         // Handle image file upload
         MultipartFile imageFile = productRequest.getImage();
         if (imageFile != null && !imageFile.isEmpty()) {
@@ -110,7 +111,7 @@ public class ProductServiceImp implements ProductService{
 
     @Override
     public ProductEntity getProductDetails(Long id) {
-        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Not"));
+        return productRepository.findById(id).orElseThrow(() -> new RuntimeException("Not found"));
     }
 
     @Override

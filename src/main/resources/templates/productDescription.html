@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Description</title>
+  <link rel="stylesheet" th:href="@{/css/descriptionViewStyle.css}">
+</head>
+<body>
+<div class="description-page">
+
+  <div class="description-section">
+    <h2>Product Description</h2>
+    <p th:text="${product.description}">Product description will appear here.</p>
+  </div>
+
+  <div class="navigation">
+    <a th:href="@{/all-products}" class="back-to-product">Back to Product Page</a>
+  </div>
+
+</div>
+
+<style>
+  .description-page {
+    font-family: Arial, sans-serif;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+
+  .description-section h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .description-section p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+
+  .navigation .back-to-product {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+
+  .navigation .back-to-product:hover {
+    background-color: #0056b3;
+  }
+</style>
+</body>
+</html>

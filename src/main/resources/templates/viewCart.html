@@ -1,48 +1,46 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>View Cart</title>
+  <link rel="stylesheet" th:href="@{/css/cartView.css}">
 </head>
 <body>
-<h1>Your Cart</h1>
-<table border="1">
-  <thead>
-  <tr>
-    <th>Product Name</th>
-    <th>Quantity</th>
-    <th>Price</th>
-    <th>Subtotal</th>
-    <th>Action</th>
-  </tr>
-  </thead>
-  <tbody>
+<div class="container">
+  <h1>Your Cart</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Price</th>
+      <th>Offer Price</th>
+      <th>VAT</th>
+      <th>Total</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Loop through the cart items -->
+    <tr th:each="cart : ${cartList}">
+      <td th:text="${cart.productEntity.productName}">Product Name</td>
+      <td th:text="${cart.productEntity.price}">Price</td>
+      <td th:text="${cart.productEntity.offerPrice}">Offer Price</td>
+      <td th:text="${cart.productEntity.vat}">VAT</td>
+      <td th:text="${cart.productEntity.total}">Total</td>
+      <td>
+        <form th:action="@{/remove}" method="post">
+          <input type="hidden" name="productId" th:value="${cart.id}" />
+          <button type="submit" style="background-color: red">Remove</button>
+        </form>
+      </td>
+    </tr>
 
-  <tr>
-    <td th:text="${cart.productEntity.productName}"></td>
-    <td th:text="${cart.saleEntity.quantity}"></td>
-    <td th:text="${cart.productEntity.price}"></td>
-    <td th:text="${cart.productEntity.price * cart.saleEntity.quantity}"></td>
-
-    <td>
-      <form th:action="@{/remove}" method="post">
-        <input type="hidden" name="productId" th:value="${cart.productEntity.id}" />
-        <button type="submit">Remove</button>
-      </form>
-    </td>
-  </tr>
-
-
-  </tbody>
-</table>
-<h3>Total: <span th:text="${cart.productEntity.total}"></span></h3>
-
-<form th:action="@{/add}" method="post">
-  <h2>Add Item to Cart</h2>
-  <label>Product ID:</label><input type="text" name="productId" /><br>
-  <label>Product Name:</label><input type="text" name="productName" /><br>
-  <label>Quantity:</label><input type="number" name="quantity" /><br>
-  <label>Price:</label><input type="number" step="0.01" name="price" /><br>
-  <button type="submit">Add to Cart</button>
-</form>
+    </tbody>
+  </table>
+  <div class="actions">
+    <a th:href="@{/all-products}" class="btn-back">Continue Shopping</a>
+  </div>
+</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.example.deviceshop.product;
 
 
+import com.example.deviceshop.entity.UserEntity;
 import com.example.deviceshop.sales.SaleEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,6 +42,9 @@ public class ProductEntity {
     private BigDecimal offerPrice;
     private BigDecimal vat;
 
+
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SaleEntity> sales;
+    @ManyToOne
+    private UserEntity userEntity;
 }

@@ -52,4 +52,5 @@ public class ProductRequest {
     @NotNull(message = "VAT cannot be null")
     private BigDecimal vat;
 
+
 }

@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +29,7 @@ public class UserEntity extends BaseEntity  {
    private Set<RoleEntity> roles = new HashSet<>();
 
 
+    public UserEntity(UUID id) {
+        super(id, null); // Pass 'id' to the BaseEntity constructor
+    }
 }

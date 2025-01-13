@@ -5,31 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Details</title>
     <link rel="stylesheet" th:href="@{/css/viewStyle.css}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="product-page">
 
     <!-- Product Image -->
     <div class="product-image">
-        <img th:src="@{${product.image}}" alt="Product Image" src="" onerror="this.src='/images/default-product.png'">
+        <img th:src="@{${product.image}}" alt="Product Image" style="background-color: #c3e6cb">
     </div>
 
-    <div class="product-details">
-        <h1 th:text="${product.getProductName}">Product Name</h1>
-        <p class="price" th:text="'৳' + ${product.price}">৳185</p>
-        <p class="discount-info" th:if="${product.offerPrice}" th:text="'Save ' + ${product.offerPrice} + ' TAKA'">Save 230 TAKA</p>
-        <p class="total" th:text="'৳' + ${product.total}">৳185</p>
-        <div class="actions">
-            <button class="add-to-cart" th:href="@{/add}">Add to Cart</button>
+        <div class="product-details" style="text-align: center; margin-bottom: 20px;color: #0C0C1E; background-color: wheat">
+            <h1 th:text="${product.productName}" >Product Name</h1>
+            <p class="price" th:text="'৳' + ${product.price}">185 TAKA</p>
+            <p class="discount-info" th:if="${product.offerPrice}" th:text="'Save ' + ${product.offerPrice} + ' TAKA'">
+                Save 230 TAKA
+            </p>
+            <p class="total" th:text="'৳' + ${product.total}">৳185</p>
         </div>
-        <div class="description">
-            <h2>Brief Description</h2>
-            <ul>
-                <li th:each="desc : ${product.description}" th:text="${desc}">Description item</li>
-            </ul>
+
+
+    <div class="actions">
+            <a class="view-description" th:href="@{/productDescription(id=${product.id})}">View Description</a>
+            <form th:action="@{/cart/add}" method="post" style="display: inline;">
+                <input type="hidden" name="productId" th:value="${product.id}">
+                <button type="submit" class="add-to-cart" onclick="changeButtonText()">Add to Cart</button>
+            </form>
         </div>
-    </div>
+
 
 </div>
+
+<script>
+    // JavaScript to change button text on click
+    function changeButtonText() {
+        const button = document.querySelector('.add-to-cart');
+        button.innerText = "Added to Cart!";
+        button.style.backgroundColor = "#28a745"; // Change color to green
+    }
+</script>
 </body>
 </html>

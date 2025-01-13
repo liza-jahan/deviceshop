@@ -42,7 +42,7 @@ public class SecurityConfig {
                         .requestMatchers("/uploads/**","/product/view/**","/all-products","/api/v1/users/**","products/**",
                                 "product/**","/products", "/api/v1/**","/css/**","/saveBill","/all-info",
                                 "/js/**","/add", "dashboard","register", "login","/productView",
-                                "/remove","/cart","/add").permitAll()
+                                "/remove","/cart","/cart/add","/productDescription").permitAll()
                         .anyRequest()
                         .authenticated()
                 )
